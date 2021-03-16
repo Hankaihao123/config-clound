@@ -1,0 +1,32 @@
+server:
+  port: 8002
+  
+spring:
+  application:
+    name: spring-cloud-provider
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3307/test?serverTimezone=GMT%2B8
+      username: root
+      password: 897910256
+      
+eureka: #将该服务注册到EurekaServer
+  client: 
+    service-url: 
+      defaultZone: http://localhost:7000/eureka,http://localhost:7001/eureka,http://localhost:7002/eureka
+  instance:  
+      instance-id: provider-hystrix-8002 #给当前实例创建一个实例ID
+      prefer-ip-address: true #显示当前真实的IP地
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
+info: #点击时获取的信息
+  app.name: spring-cloud-demo
+  company.name: www.hkh.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
